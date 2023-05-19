@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>YouTube Live</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+
+			#video-container {
+				width: 75%;
+				height: 100vh;
+				float: left;
+			}
+
+			#chat-container {
+				width: 25%;
+				height: 100vh;
+				float: right;
+			}
+
+			#chat-iframe {
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+
+			#video-iframe {
+				width: 100%;
+				height: 100%;
+				border: none;
+			}
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+		
+		function appendHtml(el, str) {
+			var div = document.createElement('div'); //container to append to
+			div.innerHTML = str;
+			while (div.children.length > 0) {
+				el.appendChild(div.children[0]);
+			}
+		}
+		
+		function getTemplate(videoId, domain) {
+		  return `<div id="video-container">
+			<iframe frameborder="0" id="video-iframe" src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+		</div>
+		<div id="chat-container">
+			<iframe frameborder="0" id="chat-iframe" src="https://www.youtube.com/live_chat?is_popout=1&v=${videoId}&embed_domain=${domain}"></iframe>
+		</div>
+		`;
+		}
+		
+		let vid = prompt("Please enter VideoID");
+		appendHtml(document.body, getTemplate(vid, window.location.hostname));
+		</script>
+
+	</body>
+</html>
